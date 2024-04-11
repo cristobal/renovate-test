@@ -19,17 +19,11 @@ jobs:
       - name: 'checkout'
         uses: actions/checkout@v3.6.0
 
-      - name: 'Install pnpm 8'
-        uses: pnpm/action-setup@v2.4.0
-        with:
-          version: 8.6.11
 
       - name: 'Install Node.js 18'
         uses: actions/setup-node@v3.8.2
         with:
           node-version: '18.18.2'
-          cache: 'pnpm'
-          cache-dependency-path: '**/pnpm-lock.yaml'
 
       ###
       # Setup npm credentials so that we can install @nrk scoped private packages also.
