@@ -1,0 +1,46 @@
+name: main
+on:
+  # workflow_dispatch: allows to run the workflow manually from the GitHub UI
+  # pull_request: triggers the workflow on pull request events
+  [workflow_dispatch, pull_request]
+
+env:
+  CI: true
+  SKIP_PW_INSTALL: true
+  # Bypass husky commit hook for CI
+  HUSKY: 0
+
+jobs:
+  main:
+    timeout-minutes: 15
+    name: 'main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'checkout'
+        uses: actions/checkout@v3.6.0
+
+      - name: 'Install pnpm 8'
+        uses: pnpm/action-setup@v2.4.0
+        with:
+          version: 8.6.11
+
+      - name: 'Install Node.js 18'
+        uses: actions/setup-node@v3.8.2
+        with:
+          node-version: '18.18.2'
+          cache: 'pnpm'
+          cache-dependency-path: '**/pnpm-lock.yaml'
+
+      ###
+      # Setup npm credentials so that we can install @nrk scoped private packages also.
+      ##
+      - name: 'Set up npm credentials'
+        run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN_READ }}
+
+      ###
+      # Install all the dependencies in the monorepo
+      ##
+      - name: 'Install dependencies'
+        run: npm --loglevel=error install
