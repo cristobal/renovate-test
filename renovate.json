@@ -1,0 +1,30 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", ":dependencyDashboard"],
+  "enabledManagers": ["npm", "github-actions", "dockerfile"], 
+  "timezone": "Europe/Oslo",
+  "schedule": [
+    "after 6am and before 3pm on every weekday"
+  ],
+  "labels": ["renovate", "dependencies"],
+  "npm": {
+    "encrypted": {
+      "npmToken": "wcFMA/xDdHCJBTolAQ/9EKmqZN7UJYu56PffgIrLdlAvB/kWKOSehdieKMzlvPuKYP1hJg/wo9OabO4yp/POrtXRfwwLay2/wXThQUSi5IjTpXwyWuYUhlGJ19RXT8PT4ZPNtLA+gd6SUNeB5OeTcb4dLf5JNOIj9qfVYByTd2NjKg7Gvv7yszqR/0xrgfvJ6cu9+5YhwrCnbjO6AXaQN/4lsIN2Pwdkq55tZ/ALdMDut7LOtWigNbrJYGIOC1G4q3w3cpPbYF/jFCxNhonRtdSwDtn6lk9rWHVkKKAWmgiHI4AkVJIJ4SuxDNcq3oJOoLEtQqqE+6pVIJyzNCzWz/RpQdMqtibbUGLy4aZHvR31vaXwa5HQJsGeT2M2g9UQ7Qv76osLa/+Fcqomi7CL3VhfIoTrfPFZdKE11D/vBMmSzOiozDP9acxsObJjd/pYnSYl2CRjxHy+qgQbxZiUblgmCYYa6dsPZf5VE1xFGySTPwQRE9DjYksiWFbFAa/HvCf7pET41qb8GBaP79WcE+OnogeawEI6/dFlqm6ZMZOlpujWF4Qy6hRJAGyT7dUn+ZHuOvkUk0s/M4I6M0B/zd8s/lFJ+ihyZ1+QAoSWC3TYcFDe4C8kTmEarEp577ZzN57cpCaPzMpP7Ys4tIrXa/fOze8+wRK8JkuvQ7ByBDGqo4mT1PjFmr1YUCLM+B7ShQGMNTHIfpZT+mnsFJOCxcYN74QWfjd9rLUjNYyCeeu8sxauBLKfeVdMgNu+OxazDejDwxv8Zh4RN/itaeyhKkXU6zKweXFxobJriAwGkzXAuhgotrjIfrPGQhbnVwuGSfobulTxKH8nEVNifxIRGIazKfuolCFN6QAAS6qzA8di5wlSd/k"
+    },
+    "ignoreDeps": [
+      "esbuild"
+    ],
+    "stabilityDays": 3
+  },
+  "prConcurrentLimit": 10,
+  "prHourlyLimit": 1,
+  "packageRules": [
+    {
+      "matchManagers": ["dockerfile", "github-actions", "azure-pipelines"],
+      "groupName": "{{manager}} non-major dependencies",
+      "matchPackagePatterns": ["*"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupSlug": "{{manager}}-minor-patch"
+    }
+  ]
+}
