@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@nrk/web-common-config": "4.1.0",
+    "@nrk/web-common-config": "4.3.0",
     "fastify": "4.26.1"
   },
   "devDependencies": {
