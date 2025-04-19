@@ -21,9 +21,9 @@ jobs:
 
 
       - name: 'Install Node.js 18'
-        uses: actions/setup-node@v3.8.2
+        uses: actions/setup-node@v3.9.1
         with:
-          node-version: '18.18.2'
+          node-version: '18.20.8'
 
       ###
       # Setup npm credentials so that we can install @nrk scoped private packages also.
